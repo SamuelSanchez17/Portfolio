@@ -15,14 +15,14 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #14110b;
-  --ink: #f3efe7;
-  --muted: #b9b0a4;
-  --card: #1c1812;
-  --accent: #f4b840;
-  --accent-strong: #ffcf75;
-  --border: #2e261c;
-  --shadow: 0 16px 40px rgba(6, 5, 3, 0.5);
+  --bg: #0d1117;
+  --ink: #e6edf3;
+  --muted: #8b949e;
+  --card: #161b22;
+  --accent: #79c0ff;
+  --accent-strong: #58a6ff;
+  --border: #30363d;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 
 body {
@@ -38,9 +38,9 @@ body {
 }
 
 [data-theme="dark"] body {
-  background-image: radial-gradient(#2a241b 1px, transparent 1px),
-    radial-gradient(#1f1a13 1px, transparent 1px),
-    linear-gradient(140deg, #17130d 0%, #1b160f 55%, #201b12 100%);
+  background-image: radial-gradient(#1f2937 1px, transparent 1px),
+    radial-gradient(#111827 1px, transparent 1px),
+    linear-gradient(140deg, #0d1117 0%, #111827 55%, #1f2937 100%);
 }
 
 .page {
@@ -129,8 +129,8 @@ body {
 }
 
 [data-theme="dark"] .theme-toggle {
-  background: #221c15;
-  border-color: #3a2f22;
+  background: var(--card);
+  border-color: var(--border);
   color: var(--ink);
 }
 
@@ -159,6 +159,39 @@ body {
 
 .icon-moon {
   display: none;
+}
+
+/* ─── Language toggle ──────────────────────────────────────────────────────── */
+.lang-toggle {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--muted);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.lang-toggle:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(24, 18, 8, 0.15);
+}
+
+[data-theme="dark"] .lang-toggle {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--muted);
 }
 
 .hero {
@@ -264,16 +297,21 @@ h1 {
 
 .contact-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0;
 }
 
 .contact-list li {
   border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
-.contact-list li:last-child {
+.contact-list li:nth-child(2n) {
   border-right: none;
+}
+
+.contact-list li:nth-last-child(-n+2) {
+  border-bottom: none;
 }
 
 .contact-item {
@@ -578,19 +616,15 @@ h2 {
   }
 
   .contact-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .contact-list li {
-    border-right: 1px solid var(--border);
+    border-right: none;
     border-bottom: 1px solid var(--border);
   }
 
-  .contact-list li:nth-child(2n) {
-    border-right: none;
-  }
-
-  .contact-list li:nth-last-child(-n+2) {
+  .contact-list li:last-child {
     border-bottom: none;
   }
 }

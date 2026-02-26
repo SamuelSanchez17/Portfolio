@@ -1,14 +1,12 @@
 const root = document.documentElement;
+
+// ─── Theme ────────────────────────────────────────────────────────────────────
 const toggle = document.querySelector(".theme-toggle");
 
 const getInitialTheme = () => {
   const saved = localStorage.getItem("theme");
-  if (saved === "light" || saved === "dark") {
-    return saved;
-  }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  if (saved === "light" || saved === "dark") return saved;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 };
 
 const setTheme = (theme) => {
@@ -24,10 +22,112 @@ const setTheme = (theme) => {
 
 if (toggle) {
   setTheme(getInitialTheme());
-
   toggle.addEventListener("click", () => {
     const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     localStorage.setItem("theme", nextTheme);
+  });
+}
+
+// ─── Language ─────────────────────────────────────────────────────────────────
+const langBtn = document.querySelector(".lang-toggle");
+
+const translations = {
+  en: {
+    "nav-about": "About",
+    "nav-projects": "Projects",
+    "nav-certifications": "Certifications",
+    "hero-pill": "Software Developer",
+    "hero-summary": `I'm Samuel Sanchez, a <strong>Software Developer (Backend / Full-Stack)</strong> with 2+ years of experience building scalable REST APIs and efficient database systems. I work mainly with Java, Python, and JavaScript, delivering well-structured solutions under Agile practices and Git-based workflows.`,
+    "h-contact": "Contact",
+    "h-skills": "Core Skills",
+    "sg-languages": "Languages",
+    "sg-frameworks": "Frameworks",
+    "sg-databases": "Databases",
+    "sg-tools": "Tools & Practices",
+    "h-experience": "Experience",
+    "er-0": "Full-stack Desktop Developer",
+    "ed-0": "Nov 2025 &ndash; Present",
+    "eb-0": `<li>Commissioned by a national Mary Kay beauty consultant to build <strong>StockBeauty App</strong>, a full-featured desktop app for inventory control, point-of-sale processing, and executive reporting.</li><li>Architected a layered Rust backend (Tauri) with Commands → Services → Repository pattern, backed by SQLite, delivering real-time stock monitoring, sales traceability, and multi-format data export (PDF/Excel).</li><li>Built a React + Vite frontend with dynamic themes, multi-language (i18n) support, a configurable sidebar, and an optimized POS interface with automatic calculations and receipt generation.</li><li>Application is currently in production and under active development, with ongoing feature iterations based on client feedback.</li>`,
+    "er-1": "Java Jr Developer",
+    "eb-1": `<li>Built the backend using Java, Spring Boot, and MySQL with clean architecture practices.</li><li>Delivered a production-style final project validated by technical leadership and HR.</li><li>Improved team delivery efficiency by 30% through collaborative Agile practices.</li>`,
+    "er-2": "Full-Stack Developer",
+    "eb-2": `<li>Developed an iOS app in Swift to teach and preserve the Mam language for 300+ students.</li><li>Designed inclusive UI flows, increasing retention by 25% in pilots.</li><li>Integrated a multilingual translation system using APIs and JSON, cutting lookup time by 40%.</li>`,
+    "er-3": "Full-Stack Developer",
+    "eb-3": `<li>Implemented an access-control system processing 500+ monthly lab entries.</li><li>Built a Java backend with authentication and access logging for scalable operations.</li><li>Reduced PostgreSQL response times by 35% and managed tasks with Git and Jira.</li>`,
+    "h-education": "Education",
+    "edr-0": "BS in Software Development and Technology Engineering",
+    "edb-0": `<li>Participated in the national Swift Student Challenge (Apple), building a social impact app recognized in the Community Change Makers category.</li><li>Designed and developed a computer lab access-control system used daily by students and faculty, improving security and operational tracking.</li><li>Completed coursework in software architecture, distributed systems, and databases, applying knowledge through real-world academic projects.</li>`,
+    "edr-1": "Technical Degree in Programming",
+    "edb-1": `<li>Acquired foundational skills in programming logic, databases, and web development.</li><li>Developed practical projects in C and web technologies as part of the technical curriculum.</li>`,
+    "h-spoken": "Spoken languages 🈷️",
+    "sl-0": "Spanish (native)",
+    "sl-1": "English (B2)",
+  },
+  es: {
+    "nav-about": "Inicio",
+    "nav-projects": "Proyectos",
+    "nav-certifications": "Certificaciones",
+    "hero-pill": "Desarrollador de Software",
+    "hero-summary": `Soy Samuel Sanchez, <strong>Desarrollador de Software (Backend / Full-Stack)</strong> con más de 2 años de experiencia construyendo REST APIs escalables y sistemas de bases de datos eficientes. Trabajo principalmente con Java, Python y JavaScript, entregando soluciones bien estructuradas bajo prácticas Agile y flujos de trabajo basados en Git.`,
+    "h-contact": "Contacto",
+    "h-skills": "Habilidades Técnicas",
+    "sg-languages": "Lenguajes",
+    "sg-frameworks": "Frameworks",
+    "sg-databases": "Bases de Datos",
+    "sg-tools": "Herramientas y Prácticas",
+    "h-experience": "Experiencia",
+    "er-0": "Desarrollador de Escritorio Full-Stack",
+    "ed-0": "Nov 2025 &ndash; Presente",
+    "eb-0": `<li>Desarrollé <strong>StockBeauty App</strong> para una consultora nacional de Mary Kay: aplicación de escritorio completa para control de inventario, punto de venta y reportes ejecutivos.</li><li>Diseñé arquitectura por capas en Rust (Tauri): Commands → Services → Repository, respaldada por SQLite, con monitoreo en tiempo real y exportación en múltiples formatos (PDF/Excel).</li><li>Construí el frontend con React + Vite: temas dinámicos, soporte multilenguaje (i18n), barra lateral configurable e interfaz POS con cálculos automáticos y generación de comprobantes.</li><li>Aplicación en producción con desarrollo activo continuo e iteraciones basadas en retroalimentación del cliente.</li>`,
+    "er-1": "Desarrollador Jr Java",
+    "eb-1": `<li>Desarrollé el backend con Java, Spring Boot y MySQL siguiendo prácticas de arquitectura limpia.</li><li>Entregué un proyecto final de nivel productivo, validado por liderazgo técnico y RRHH.</li><li>Mejoré la eficiencia de entrega del equipo en un 30% mediante prácticas Agile colaborativas.</li>`,
+    "er-2": "Desarrollador Full-Stack",
+    "eb-2": `<li>Desarrollé una app iOS en Swift para enseñar y preservar el idioma Mam para más de 300 estudiantes.</li><li>Diseñé flujos de UI inclusivos, aumentando la retención en un 25% en pruebas piloto.</li><li>Integré un sistema de traducción multilenguaje con APIs y JSON, reduciendo el tiempo de búsqueda en un 40%.</li>`,
+    "er-3": "Desarrollador Full-Stack",
+    "eb-3": `<li>Implementé un sistema de control de acceso que procesa más de 500 entradas mensuales al laboratorio.</li><li>Desarrollé un backend en Java con autenticación y registro de accesos para operaciones escalables.</li><li>Reduje los tiempos de respuesta en PostgreSQL en un 35% y gestioné tareas con Git y Jira.</li>`,
+    "h-education": "Educación",
+    "edr-0": "Licenciatura en Ing. en Desarrollo y Tecnologías de Software",
+    "edb-0": `<li>Participé en el Swift Student Challenge nacional (Apple), desarrollando una app de impacto social reconocida en la categoría Community Change Makers.</li><li>Diseñé y desarrollé un sistema de control de acceso a laboratorio utilizado diariamente por estudiantes y docentes, mejorando la seguridad y el seguimiento operativo.</li><li>Cursé asignaturas en arquitectura de software, sistemas distribuidos y bases de datos, aplicando conocimientos en proyectos académicos reales.</li>`,
+    "edr-1": "Técnico en Programación",
+    "edb-1": `<li>Adquirí habilidades fundamentales en lógica de programación, bases de datos y desarrollo web.</li><li>Desarrollé proyectos prácticos en C y tecnologías web como parte del plan de estudios técnico.</li>`,
+    "h-spoken": "Idiomas hablados 🈷️",
+    "sl-0": "Español (nativo)",
+    "sl-1": "Inglés (B2)",
+  },
+};
+
+const applyLanguage = (lang) => {
+  root.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.dataset.i18n;
+    if (translations[lang]?.[key] !== undefined) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+    const key = el.dataset.i18nHtml;
+    if (translations[lang]?.[key] !== undefined) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+  if (langBtn) {
+    langBtn.textContent = lang === "en" ? "ES" : "EN";
+    langBtn.setAttribute(
+      "aria-label",
+      lang === "en" ? "Cambiar a Español" : "Switch to English"
+    );
+  }
+};
+
+const getInitialLang = () => localStorage.getItem("lang") || "en";
+
+applyLanguage(getInitialLang());
+
+if (langBtn) {
+  langBtn.addEventListener("click", () => {
+    const next = root.lang === "en" ? "es" : "en";
+    applyLanguage(next);
+    localStorage.setItem("lang", next);
   });
 }
