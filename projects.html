@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Projects | Samuel Sanchez</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/jpeg" href="Assets/img/profile.jpg" />
+    <link href="css/reset.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="page">
+      <nav class="top-nav" aria-label="Primary">
+        <div class="nav-profile">
+          <img
+            src="Assets/img/profile.jpg"
+            width="36"
+            height="36"
+            alt="Samuel Sanchez Guzman"
+          />
+        </div>
+        <div class="nav-links">
+          <a href="index2.html" data-i18n="nav-about"> About </a>
+          <a href="projects.html" class="selected" data-i18n="nav-projects"> Projects </a>
+          <a href="certifications.html" data-i18n="nav-certifications"> Certifications </a>
+        </div>
+        <button class="lang-toggle" type="button" aria-label="Cambiar a Español">EN</button>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-pressed="false"
+          aria-label="Toggle dark mode"
+        >
+          <span class="icon-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              ></path>
+            </svg>
+          </span>
+          <span class="icon-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img" focusable="false">
+              <path d="M20.4 12.2A7 7 0 0 1 8 3.9c-.2 0-.4 0-.6 0A7.3 7.3 0 0 0 12 20.8a7.2 7.2 0 0 0 8.4-8.6z"></path>
+            </svg>
+          </span>
+        </button>
+      </nav>
+
+      <header class="projects-hero">
+        <h1 class="projects-title" data-i18n="proj-page-title">Projects</h1>
+        <p class="projects-subtitle" data-i18n="proj-page-subtitle">
+          A selection of software I've built — from enterprise desktop apps to backend systems and mobile applications.
+        </p>
+      </header>
+
+      <section class="projects-section">
+        <div class="project-filters" id="project-filters"></div>
+        <ul class="project-grid" id="project-grid"></ul>
+      </section>
+    </main>
+
+    <script src="js/app.js" type="module"></script>
+    <script src="js/projects/controller.js" type="module"></script>
+  </body>
+</html>

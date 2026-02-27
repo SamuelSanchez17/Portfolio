@@ -60,12 +60,15 @@ const translations = {
     "edb-0": `<li>Participated in the national Swift Student Challenge (Apple), building a social impact app recognized in the Community Change Makers category.</li><li>Designed and developed a computer lab access-control system used daily by students and faculty, improving security and operational tracking.</li><li>Completed coursework in software architecture, distributed systems, and databases, applying knowledge through real-world academic projects.</li>`,
     "edr-1": "Technical Degree in Programming",
     "edb-1": `<li>Acquired foundational skills in programming logic, databases, and web development.</li><li>Developed practical projects in C and web technologies as part of the technical curriculum.</li>`,
+    "h-projects": "Selected Projects",
+    "proj-page-title": "Projects",
+    "proj-page-subtitle": "A selection of software I've built — from enterprise desktop apps to backend systems and mobile applications.",
     "h-spoken": "Spoken languages 🈷️",
     "sl-0": "Spanish (native)",
     "sl-1": "English (B2)",
   },
   es: {
-    "nav-about": "Inicio",
+    "nav-about": "Sobre mí",
     "nav-projects": "Proyectos",
     "nav-certifications": "Certificaciones",
     "hero-pill": "Desarrollador de Software",
@@ -91,6 +94,9 @@ const translations = {
     "edb-0": `<li>Participé en el Swift Student Challenge nacional (Apple), desarrollando una app de impacto social reconocida en la categoría Community Change Makers.</li><li>Diseñé y desarrollé un sistema de control de acceso a laboratorio utilizado diariamente por estudiantes y docentes, mejorando la seguridad y el seguimiento operativo.</li><li>Cursé asignaturas en arquitectura de software, sistemas distribuidos y bases de datos, aplicando conocimientos en proyectos académicos reales.</li>`,
     "edr-1": "Técnico en Programación",
     "edb-1": `<li>Adquirí habilidades fundamentales en lógica de programación, bases de datos y desarrollo web.</li><li>Desarrollé proyectos prácticos en C y tecnologías web como parte del plan de estudios técnico.</li>`,
+    "h-projects": "Proyectos Destacados",
+    "proj-page-title": "Proyectos",
+    "proj-page-subtitle": "Una selección de software que he desarrollado — desde apps de escritorio empresariales hasta sistemas backend y aplicaciones móviles.",
     "h-spoken": "Idiomas hablados 🈷️",
     "sl-0": "Español (nativo)",
     "sl-1": "Inglés (B2)",
@@ -118,6 +124,8 @@ const applyLanguage = (lang) => {
       lang === "en" ? "Cambiar a Español" : "Switch to English"
     );
   }
+  // Notify dynamically-rendered components (e.g. project cards)
+  document.dispatchEvent(new CustomEvent("portfolioLangChange", { detail: { lang } }));
 };
 
 const getInitialLang = () => localStorage.getItem("lang") || "en";
@@ -131,3 +139,14 @@ if (langBtn) {
     localStorage.setItem("lang", next);
   });
 }
+
+// ─── Obfuscated contacts: text is stored reversed, JS rebuilds href on click ──
+document.querySelectorAll(".contact-obf").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const reversed = link.querySelector(".reverse").textContent.trim();
+    const real = reversed.split("").reverse().join("");
+    const kind = link.dataset.kind;
+    window.location.href = kind === "email" ? `mailto:${real}` : `tel:${real.replace(/\s/g, "")}`;
+  });
+});

@@ -1,0 +1,181 @@
+import { ProjectService } from "./service.js";
+
+/** @type {Record<string, Record<string, string>>} */
+const TYPE_LABELS = {
+  en: { all: "All", desktop: "Desktop", mobile: "Mobile", backend: "Backend" },
+  es: { all: "Todos", desktop: "Escritorio", mobile: "Móvil", backend: "Backend" },
+};
+
+class ProjectController {
+  constructor() {
+    this.service = new ProjectService();
+    /** @type {import('./service.js').EnrichedProject[]} */
+    this.allProjects = [];
+    this.activeFilter = "all";
+    /** @type {HTMLElement|null} */
+    this.gridEl = null;
+    /** @type {HTMLElement|null} */
+    this.filtersEl = null;
+  }
+
+  /** @returns {string} */
+  get lang() {
+    return document.documentElement.lang || "en";
+  }
+
+  // ─── Filter pills ────────────────────────────────────────────────────────
+  _renderFilters() {
+    const types = ["all", "desktop", "mobile", "backend"];
+    this.filtersEl.innerHTML = "";
+    types.forEach((type) => {
+      const btn = document.createElement("button");
+      btn.className =
+        "filter-pill" + (type === this.activeFilter ? " active" : "");
+      btn.dataset.type = type;
+      btn.textContent = TYPE_LABELS[this.lang]?.[type] ?? type;
+      btn.addEventListener("click", () => {
+        this.activeFilter = type;
+        this._renderAll();
+      });
+      this.filtersEl.appendChild(btn);
+    });
+  }
+
+  // ─── Project card ────────────────────────────────────────────────────────
+  /**
+   * @param {import('./service.js').EnrichedProject} project
+   * @returns {HTMLLIElement}
+   */
+  _createCard(project) {
+    const lang = this.lang;
+    const summary = project.summary[lang] ?? project.summary.en;
+    const typeLabel = TYPE_LABELS[lang]?.[project.type] ?? project.type;
+    const hasStats =
+      project.githubInfo?.stars !== null &&
+      project.githubInfo?.stars !== undefined;
+    const hasScreenshots = project.screenshots && project.screenshots.length > 0;
+    const hasGithub = !!project.githubUsername && !!project.githubRepositoryName;
+    const githubUrl = hasGithub
+      ? `https://github.com/${project.githubUsername}/${project.githubRepositoryName}`
+      : null;
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div class="proj-card">
+        ${hasScreenshots ? `
+          <div class="proj-screenshots">
+            <div class="proj-screenshots-track">
+              ${project.screenshots.map((src, i) => `
+                <img src="${src}" alt="${project.name} screenshot ${i + 1}"
+                  class="proj-screenshot${i === 0 ? " active" : ""}" loading="lazy"/>
+              `).join("")}
+            </div>
+            ${project.screenshots.length > 1 ? `
+              <div class="proj-screenshots-dots">
+                ${project.screenshots.map((_, i) => `
+                  <button class="proj-dot${i === 0 ? " active" : ""}" data-index="${i}" aria-label="Screenshot ${i + 1}"></button>
+                `).join("")}
+              </div>
+            ` : ""}
+          </div>
+        ` : ""}
+        <div class="proj-card-head">
+          <div class="proj-title-row">
+            <h3 class="proj-name">${project.name}</h3>
+            <span class="proj-type-badge proj-type-${project.type}">${typeLabel}</span>
+          </div>
+          ${hasStats ? `
+            <div class="proj-github-stats">
+              <span class="proj-stat">⭐ ${project.githubInfo.stars}</span>
+              <span class="proj-stat">⤴ ${project.githubInfo.forks}</span>
+            </div>
+          ` : ""}
+        </div>
+        <p class="proj-summary">${summary}</p>
+        <ul class="proj-tech-list">
+          ${project.techStack.map((t) => `<li>${t}</li>`).join("")}
+        </ul>
+        <div class="proj-footer">
+          <div class="proj-actions">
+            ${hasGithub ? `
+              <a href="${githubUrl}" target="_blank" class="proj-link proj-link-github" aria-label="View ${project.name} on GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3.1a2.7 2.7 0 0 0-.8-2.1c2.7-.3 5.5-1.3 5.5-6A4.7 4.7 0 0 0 19 7.5a4.4 4.4 0 0 0-.1-3.2s-1-.3-3.3 1.2a11.5 11.5 0 0 0-6 0C7.3 4 6.3 4.3 6.3 4.3A4.4 4.4 0 0 0 6.2 7.5a4.7 4.7 0 0 0-1.3 3.5c0 4.7 2.8 5.7 5.5 6a2.7 2.7 0 0 0-.8 2.1V22"/>
+                </svg>
+                Code
+              </a>
+            ` : `
+              <span class="proj-private">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                Private
+              </span>
+            `}
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Screenshot carousel
+    if (hasScreenshots && project.screenshots.length > 1) {
+      const dots = li.querySelectorAll(".proj-dot");
+      const imgs = li.querySelectorAll(".proj-screenshot");
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const idx = parseInt(dot.dataset.index, 10);
+          imgs.forEach((img, i) => img.classList.toggle("active", i === idx));
+          dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+        });
+      });
+    }
+
+    return li;
+  }
+
+  // ─── Full render cycle ───────────────────────────────────────────────────
+  _renderAll() {
+    this._renderFilters();
+    const filtered = this.service.filterByType(this.allProjects, this.activeFilter);
+    this.gridEl.innerHTML = "";
+    if (filtered.length === 0) {
+      const empty = document.createElement("li");
+      empty.className = "proj-empty";
+      empty.textContent =
+        this.lang === "es" ? "Sin proyectos en esta categoría." : "No projects in this category.";
+      this.gridEl.appendChild(empty);
+      return;
+    }
+    filtered.forEach((p) => this.gridEl.appendChild(this._createCard(p)));
+  }
+
+  // ─── Bootstrap ──────────────────────────────────────────────────────────
+  init() {
+    document.addEventListener("DOMContentLoaded", async () => {
+      this.gridEl = document.getElementById("project-grid");
+      this.filtersEl = document.getElementById("project-filters");
+      if (!this.gridEl || !this.filtersEl) return;
+
+      // Loading skeleton
+      this._renderFilters();
+      this.gridEl.innerHTML =
+        '<li class="proj-loading"><span></span><span></span><span></span></li>';
+
+      try {
+        this.allProjects = await this.service.getAllEnriched();
+      } catch (err) {
+        console.error("ProjectController: failed to load projects", err);
+        this.allProjects = [];
+      }
+
+      this._renderAll();
+
+      // Re-render labels + summaries on language switch
+      document.addEventListener("portfolioLangChange", () => this._renderAll());
+    });
+  }
+}
+
+const controller = new ProjectController();
+controller.init();
