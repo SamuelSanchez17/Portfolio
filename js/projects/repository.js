@@ -63,7 +63,7 @@ class ProjectRepository {
           es: "App iOS para enseñar y preservar el idioma mam para más de 300 estudiantes universitarios, con sistema de traducción multilenguaje integrado vía APIs y JSON.",
         },
         links: [],
-        techStack: ["Swift", "iOS", "API REST", "JSON"],
+        techStack: ["Swift", "iOS", "API REST", "JSON", "Git", "Figma"],
         type: MOBILE_TYPE,
         screenshots: [
           // "Assets/img/projects/mam-app/home.png",
@@ -80,7 +80,15 @@ class ProjectRepository {
         links: [],
         techStack: ["Java", "Spring Boot", "PostgreSQL", "Git", "Jira"],
         type: BACKEND_TYPE,
-        screenshots: [],
+        screenshots: 
+        [
+          "../Assets/projects/labAccess/Login.png",
+          "../Assets/projects/labAccess/SelectLab.png",
+          "../Assets/projects/labAccess/Scan.png",
+          "../Assets/projects/labAccess/ScanQR.png",
+          "../Assets/projects/labAccess/Reports.png",
+          "../Assets/projects/labAccess/Visits.png",
+        ],
         githubUsername: "SamuelSanchez17",  // private repository
         githubRepositoryName: "Sistema-de-Acceso-Laboratorios-de-Computo-FDN",
       },
