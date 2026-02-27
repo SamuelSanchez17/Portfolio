@@ -131,7 +131,104 @@ class ProjectController {
       });
     }
 
+    // Open modal on screenshot click
+    if (hasScreenshots) {
+      const imgs = li.querySelectorAll(".proj-screenshot");
+      imgs.forEach((img, i) => {
+        img.style.cursor = "zoom-in";
+        img.addEventListener("click", () => {
+          this._openModal(project.screenshots, i);
+        });
+      });
+    }
+
     return li;
+  }
+
+  // ─── Image modal ─────────────────────────────────────────────────────────
+  _initModal() {
+    const modal = document.createElement("div");
+    modal.id = "img-modal";
+    modal.className = "img-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.innerHTML = `
+      <div class="img-modal-backdrop"></div>
+      <div class="img-modal-box">
+        <button class="img-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <button class="img-modal-nav img-modal-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <img class="img-modal-img" src="" alt="" />
+        <button class="img-modal-nav img-modal-next" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+        <div class="img-modal-counter"></div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    this._modal = modal;
+    this._modalImg = modal.querySelector(".img-modal-img");
+    this._modalPrev = modal.querySelector(".img-modal-prev");
+    this._modalNext = modal.querySelector(".img-modal-next");
+    this._modalCounter = modal.querySelector(".img-modal-counter");
+    this._modalScreenshots = [];
+    this._modalIndex = 0;
+
+    modal.querySelector(".img-modal-backdrop").addEventListener("click", () => this._closeModal());
+    modal.querySelector(".img-modal-close").addEventListener("click", () => this._closeModal());
+    this._modalPrev.addEventListener("click", () => this._navigateModal(-1));
+    this._modalNext.addEventListener("click", () => this._navigateModal(1));
+
+    document.addEventListener("keydown", (e) => {
+      if (!this._modal.classList.contains("open")) return;
+      if (e.key === "Escape") this._closeModal();
+      if (e.key === "ArrowLeft") this._navigateModal(-1);
+      if (e.key === "ArrowRight") this._navigateModal(1);
+    });
+  }
+
+  /**
+   * @param {string[]} screenshots
+   * @param {number} index
+   */
+  _openModal(screenshots, index) {
+    this._modalScreenshots = screenshots;
+    this._modalIndex = index;
+    this._updateModal();
+    this._modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  _closeModal() {
+    this._modal.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  /** @param {number} dir — -1 prev, +1 next */
+  _navigateModal(dir) {
+    const total = this._modalScreenshots.length;
+    this._modalIndex = (this._modalIndex + dir + total) % total;
+    this._updateModal();
+  }
+
+  _updateModal() {
+    const total = this._modalScreenshots.length;
+    const idx = this._modalIndex;
+    this._modalImg.src = this._modalScreenshots[idx];
+    this._modalImg.alt = `Screenshot ${idx + 1} of ${total}`;
+    this._modalCounter.textContent = total > 1 ? `${idx + 1} / ${total}` : "";
+    this._modalPrev.hidden = idx === 0;
+    this._modalNext.hidden = idx === total - 1;
   }
 
   // ─── Full render cycle ───────────────────────────────────────────────────
@@ -156,6 +253,8 @@ class ProjectController {
       this.gridEl = document.getElementById("project-grid");
       this.filtersEl = document.getElementById("project-filters");
       if (!this.gridEl || !this.filtersEl) return;
+
+      this._initModal();
 
       // Loading skeleton
       this._renderFilters();
