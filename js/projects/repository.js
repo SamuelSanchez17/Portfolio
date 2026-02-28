@@ -65,8 +65,12 @@ class ProjectRepository {
         links: [],
         techStack: ["Swift", "iOS", "API REST", "JSON", "Git", "Figma"],
         type: MOBILE_TYPE,
-        screenshots: [
-          // "Assets/img/projects/mam-app/home.png",
+        screenshots: 
+        [
+          "../Assets/projects/mamLingua/Mamlingua.png",
+          "../Assets/projects/mamLingua/Descripcion.png",
+          "../Assets/projects/mamLingua/Traditions.png",
+          "../Assets/projects/mamLingua/Translator.png"
         ],
         githubUsername: "SamuelSanchez17",
         githubRepositoryName: "Mam-Project",
