@@ -650,25 +650,56 @@ h2 {
 .projects-hero {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 32px;
+  border-radius: 28px;
+  padding: 32px 36px;
   box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
   animation: rise 0.8s ease both;
+}
+
+.projects-hero::after {
+  content: "";
+  position: absolute;
+  top: -130px;
+  right: -110px;
+  width: 310px;
+  height: 310px;
+  background: radial-gradient(circle, rgba(244, 184, 64, 0.28), transparent 70%);
+  pointer-events: none;
+}
+
+.projects-hero::before {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  left: -80px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(244, 184, 64, 0.15), transparent 70%);
+  pointer-events: none;
 }
 
 .projects-title {
   font-family: "Newsreader", Georgia, serif;
-  font-size: 2.2rem;
+  font-size: clamp(2.2rem, 2.8vw, 3.2rem);
   font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--ink);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
 }
 
 .projects-subtitle {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--muted);
-  line-height: 1.6;
-  max-width: 600px;
+  line-height: 1.7;
+  max-width: 56ch;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .projects-section {
@@ -1410,4 +1441,440 @@ h2 {
   .certs-hero { padding: 28px 24px; }
 
   .cert-body { padding: 16px 18px 18px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Contact Page
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Hero ─────────────────────────────────────────────────────────────────────── */
+.contact-hero {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 40px 36px 36px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 620px;
+  margin: 0 auto;
+  width: 100%;
+  animation: rise 0.8s ease both;
+}
+
+.contact-hero::after {
+  content: "";
+  position: absolute;
+  top: -130px;
+  right: -110px;
+  width: 310px;
+  height: 310px;
+  background: radial-gradient(circle, rgba(244, 184, 64, 0.28), transparent 70%);
+  pointer-events: none;
+}
+
+.contact-hero::before {
+  content: "";
+  position: absolute;
+  bottom: -100px;
+  left: -80px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(244, 184, 64, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.contact-hero-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: rgba(244, 184, 64, 0.15);
+  border: 1px solid rgba(244, 184, 64, 0.3);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-hero-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke: var(--accent-strong);
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-title {
+  font-family: "Newsreader", "Times New Roman", serif;
+  font-size: clamp(2.2rem, 2.8vw, 3.2rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 0 auto;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+/* Form Card ────────────────────────────────────────────────────────────────── */
+.contact-form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 30px;
+  box-shadow: 0 10px 26px rgba(24, 18, 8, 0.08);
+  position: relative;
+  overflow: hidden;
+  max-width: 620px;
+  margin: 0 auto;
+  width: 100%;
+  animation: rise 0.8s 0.1s ease both;
+}
+
+.contact-form-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong), var(--accent));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* Form layout ──────────────────────────────────────────────────────────────── */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Input wrappers ───────────────────────────────────────────────────────────── */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.2s ease;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  outline: none;
+}
+
+.input-wrapper input::placeholder {
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(244, 184, 64, 0.15);
+  background: var(--card);
+}
+
+.input-wrapper:focus-within .input-icon svg {
+  stroke: var(--accent-strong);
+}
+
+/* Textarea ─────────────────────────────────────────────────────────────────── */
+.textarea-wrapper textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 140px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  outline: none;
+}
+
+.textarea-wrapper textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.textarea-wrapper textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(244, 184, 64, 0.15);
+  background: var(--card);
+}
+
+/* Validation states ────────────────────────────────────────────────────────── */
+.form-group.invalid .input-wrapper input,
+.form-group.invalid .textarea-wrapper textarea {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+}
+
+.form-group.invalid .input-icon svg {
+  stroke: #e74c3c;
+}
+
+/* Submit button ────────────────────────────────────────────────────────────── */
+.btn-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #1a1400;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  align-self: stretch;
+}
+
+.btn-send::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.btn-send:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(244, 184, 64, 0.35);
+}
+
+.btn-send:hover::before {
+  opacity: 1;
+}
+
+.btn-send:active {
+  transform: translateY(0);
+}
+
+.btn-send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-send-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn-send.sending .btn-send-text::after {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #1a1400;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.btn-send.sending .btn-send-icon {
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Status messages ──────────────────────────────────────────────────────────── */
+.form-status {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 48px 24px;
+  animation: rise 0.5s ease both;
+}
+
+.form-status:not([hidden]) {
+  display: flex;
+}
+
+.status-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-status--success .status-icon {
+  background: rgba(46, 204, 113, 0.12);
+}
+
+.form-status--success .status-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: #2ecc71;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.form-status--error .status-icon {
+  background: rgba(231, 76, 60, 0.12);
+}
+
+.form-status--error .status-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: #e74c3c;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.form-status h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+
+.form-status p {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin: 0;
+  max-width: 36ch;
+}
+
+.btn-reset {
+  padding: 10px 24px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-reset:hover {
+  background: rgba(244, 184, 64, 0.12);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* Dark mode specifics ──────────────────────────────────────────────────────── */
+[data-theme="dark"] .input-wrapper input,
+[data-theme="dark"] .textarea-wrapper textarea {
+  background: rgba(13, 17, 23, 0.6);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .input-wrapper input:focus,
+[data-theme="dark"] .textarea-wrapper textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+  background: var(--card);
+}
+
+[data-theme="dark"] .btn-send {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #0d1117;
+}
+
+[data-theme="dark"] .btn-send:hover {
+  box-shadow: 0 12px 28px rgba(88, 166, 255, 0.25);
+}
+
+[data-theme="dark"] .form-group.invalid .input-wrapper input,
+[data-theme="dark"] .form-group.invalid .textarea-wrapper textarea {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.12);
+}
+
+/* Contact page responsive ──────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .contact-hero {
+    padding: 28px 24px;
+  }
+
+  .contact-form-card {
+    padding: 24px 20px;
+  }
 }
