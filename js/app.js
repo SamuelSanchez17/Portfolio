@@ -74,6 +74,8 @@ const translations = {
     "h-spoken": "Spoken languages 🈷️",
     "sl-0": "Spanish (native)",
     "sl-1": "English (B2)",
+    "cl-cv": "Curriculum",
+    "cv-download": "Download CV",
     "nav-contact": "Message",
     "contact-page-title": "Let's Work Together",
     "contact-page-subtitle": "Interested in collaborating or have an opportunity? Send me a message and I'll get back to you as soon as possible.",
@@ -129,6 +131,8 @@ const translations = {
     "h-spoken": "Idiomas hablados 🈷️",
     "sl-0": "Español (nativo)",
     "sl-1": "Inglés (B2)",
+    "cl-cv": "Currículum",
+    "cv-download": "Descargar CV",
     "nav-contact": "Mensaje",
     "contact-page-title": "Trabajemos Juntos",
     "contact-page-subtitle": "¿Te interesa colaborar o tienes una oportunidad? Envíame un mensaje y te responderé lo antes posible.",
@@ -188,7 +192,6 @@ document.querySelectorAll(".contact-obf").forEach((link) => {
     e.preventDefault();
     const reversed = link.querySelector(".reverse").textContent.trim();
     const real = reversed.split("").reverse().join("");
-    const kind = link.dataset.kind;
-    window.location.href = kind === "email" ? `mailto:${real}` : `tel:${real.replace(/\s/g, "")}`;
+    window.location.href = `mailto:${real}`;
   });
 });
