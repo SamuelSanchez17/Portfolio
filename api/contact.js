@@ -1,7 +1,7 @@
 // Vercel Serverless Function — POST /api/contact
 // Las variables de entorno se configuran en Vercel Dashboard → Settings → Environment Variables
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Solo acepta metodo POST
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
