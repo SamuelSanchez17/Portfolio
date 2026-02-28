@@ -383,15 +383,49 @@ h1 {
   align-items: center;
   gap: 12px;
   padding: 16px 18px;
-  transition: background 0.18s ease;
+  transition:
+    background 0.25s ease,
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s ease;
   text-decoration: none;
   color: inherit;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
 }
 
 .contact-item:hover {
-  background: rgba(244, 184, 64, 0.08);
+  background: rgba(244, 184, 64, 0.10);
+  transform: translateX(6px);
+  box-shadow: -3px 0 0 0 var(--accent-strong);
+}
+
+.contact-item:active {
+  transform: translateX(3px) scale(0.98);
+  transition-duration: 0.08s;
+}
+
+/* Icon reacts on parent hover */
+.contact-item .contact-icon {
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.contact-item:hover .contact-icon {
+  transform: scale(1.18) rotate(-4deg);
+  background: rgba(244, 184, 64, 0.28);
+  color: var(--accent-strong);
+}
+
+/* Value text subtle slide */
+.contact-item .contact-value {
+  transition: color 0.25s ease;
+}
+
+.contact-item:hover .contact-value {
+  color: var(--accent-strong);
 }
 
 /* Anti-scraper: text stored reversed, CSS flips it visually */

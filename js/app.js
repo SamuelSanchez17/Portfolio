@@ -186,7 +186,7 @@ if (langBtn) {
   });
 }
 
-// ─── Obfuscated contacts: text is stored reversed, JS rebuilds href on click ──
+// Obfuscated contacts: text is stored reversed, JS rebuilds href on click
 document.querySelectorAll(".contact-obf").forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();

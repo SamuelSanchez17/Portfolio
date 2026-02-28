@@ -118,7 +118,7 @@ class ProjectController {
       </div>
     `;
 
-    // Screenshot carousel
+    // Carrusel de Screenshots
     if (hasScreenshots && project.screenshots.length > 1) {
       const dots = li.querySelectorAll(".proj-dot");
       const imgs = li.querySelectorAll(".proj-screenshot");
@@ -131,7 +131,7 @@ class ProjectController {
       });
     }
 
-    // Open modal on screenshot click
+    // Abre el modal al hacer click en cualquier screenshot
     if (hasScreenshots) {
       const imgs = li.querySelectorAll(".proj-screenshot");
       imgs.forEach((img, i) => {
@@ -231,7 +231,7 @@ class ProjectController {
     this._modalNext.hidden = idx === total - 1;
   }
 
-  // ─── Full render cycle ───────────────────────────────────────────────────
+  // ─── Circulo del render completo ───────────────────────────────────────────────────
   _renderAll() {
     this._renderFilters();
     const filtered = this.service.filterByType(this.allProjects, this.activeFilter);
@@ -256,7 +256,7 @@ class ProjectController {
 
       this._initModal();
 
-      // Loading skeleton
+      // Carga el esqueleto
       this._renderFilters();
       this.gridEl.innerHTML =
         '<li class="proj-loading"><span></span><span></span><span></span></li>';
@@ -270,7 +270,7 @@ class ProjectController {
 
       this._renderAll();
 
-      // Re-render labels + summaries on language switch
+      //Re-renderiza etiquetas + resúmenes al cambiar idioma
       document.addEventListener("portfolioLangChange", () => this._renderAll());
     });
   }

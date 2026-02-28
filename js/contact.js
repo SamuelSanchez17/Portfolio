@@ -1,6 +1,6 @@
-// ─── Contact Form (via Vercel Serverless Function) ────────────────────────────
-// Las claves de EmailJS están seguras en Vercel Environment Variables.
-// El frontend solo llama a /api/contact — nunca expone las credenciales.
+// ─── Contact Form
+// Las claves de EmailJS se almacenan en Vercel Environment Variables.
+// frontend solo llama a /api/contact.
 
 (() => {
   const form = document.getElementById("contact-form");
