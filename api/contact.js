@@ -2,7 +2,7 @@
 // Las variables de entorno se configuran en Vercel Dashboard → Settings → Environment Variables
 
 export default async function handler(req, res) {
-  // Solo aceptar POST
+  // Solo acepta metodo POST
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -20,7 +20,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, message } = req.body;
+    const { name, email, title, message } = req.body || {};
+
+    if (!name || !email || !title || !message) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
 
     // Llamar a la API REST de EmailJS desde el servidor
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
@@ -30,7 +34,7 @@ export default async function handler(req, res) {
         service_id: SERVICE_ID,
         template_id: TEMPLATE_ID,
         user_id: PUBLIC_KEY,
-        template_params: { name, email, message },
+        template_params: { name, email, title, message },
       }),
     });
 

@@ -45,14 +45,20 @@
     btnSend.classList.add("sending");
 
     try {
+      const name = form.querySelector("#from_name")?.value.trim() || "";
+      const email = form.querySelector("#from_email")?.value.trim() || "";
+      const title = form.querySelector("#Title")?.value.trim() || "";
+      const message = form.querySelector("#message")?.value.trim() || "";
+
       // Enviar datos a la serverless function — las claves están en el servidor
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: form.querySelector('[name="name"]')?.value,
-          email: form.querySelector('[name="email"]')?.value,
-          message: form.querySelector('[name="message"]')?.value,
+          name,
+          email,
+          title,
+          message,
         }),
       });
 
