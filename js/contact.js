@@ -48,7 +48,7 @@
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    let valid = true;
+    let allValid = true;
     form.querySelectorAll("input, textarea").forEach((f) => {
       if(!validateField(f)) allValid = false;
     });
