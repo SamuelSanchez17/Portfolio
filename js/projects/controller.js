@@ -67,7 +67,9 @@ class ProjectController {
             <div class="proj-screenshots-track">
               ${project.screenshots.map((src, i) => `
                 <img src="${src}" alt="${project.name} screenshot ${i + 1}"
-                  class="proj-screenshot${i === 0 ? " active" : ""}" loading="lazy"/>
+                  class="proj-screenshot${i === 0 ? " active" : ""}"
+                  loading="${i === 0 ? "eager" : "lazy"}"
+                  decoding="async"/>
               `).join("")}
             </div>
             ${project.screenshots.length > 1 ? `

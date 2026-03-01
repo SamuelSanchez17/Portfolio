@@ -93,7 +93,7 @@ class ProjectRepository {
           "../Assets/projects/labAccess/Reports.png",
           "../Assets/projects/labAccess/Visits.png",
         ],
-        githubUsername: "SamuelSanchez17",  // private repository
+        githubUsername: "",  // private repository
         githubRepositoryName: "Sistema-de-Acceso-Laboratorios-de-Computo-FDN",
       },
     ];
