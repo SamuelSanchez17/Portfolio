@@ -1,91 +1,97 @@
 // ─── Contact Form
-// Las claves de EmailJS se almacenan en Vercel Environment Variables.
-// frontend solo llama a /api/contact.
 
 (() => {
+
+  const EMAILJS_SERVICE_ID = "service_jl9p8wp";
+  const EMAILJS_TEMPLATE_ID = "template_ufu8p7d";
+  const EMAILJS_PUBLIC_KEY = "n0H0xS-t7x9ANFdDJ";
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
   const form = document.getElementById("contact-form");
-  const btnSend = document.getElementById("btn-send");
-  const successEl = document.getElementById("form-success");
-  const errorEl = document.getElementById("form-error");
+  const submitButton = document.getElementById("btn-send");
+  const successMessage = document.getElementById("form-success");
+  const errorMessage = document.getElementById("form-error");
   const btnReset = document.getElementById("btn-reset");
   const btnRetry = document.getElementById("btn-retry");
 
-  if (!form) return;
+  if(!form) return;
 
-  const validateField = (input) => {
+  //validacion en tiempo real
+  const validateField = (input) => 
+  {
     const group = input.closest(".form-group");
-    if (!group) return true;
+    if(!group) return true;
+
     let valid = true;
-    if (input.required && !input.value.trim()) valid = false;
-    if (input.type === "email" && input.value.trim()) {
+    if(input.required && !input.value.trim()) valid = false;
+    if(input.type === "email" && input.value.trim()) 
+    {
       valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
     }
     group.classList.toggle("invalid", !valid);
     return valid;
   };
 
-  form.querySelectorAll("input, textarea").forEach((field) => {
+  form.querySelectorAll("input, textarea").forEach((field) => 
+  { 
     field.addEventListener("blur", () => validateField(field));
     field.addEventListener("input", () => {
-      if (field.closest(".form-group")?.classList.contains("invalid")) {
+      if(field.closest("form-group")?.classList.contains("invalid"))
+      {
         validateField(field);
       }
     });
   });
 
+  // Enviar formulario
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    let allValid = true;
-    form.querySelectorAll("input, textarea").forEach((f) => {
-      if (!validateField(f)) allValid = false;
-    });
-    if (!allValid) return;
 
-    btnSend.disabled = true;
-    btnSend.classList.add("sending");
+    let valid = true;
+    form.querySelectorAll("input, textarea").forEach((f) => {
+      if(!validateField(f)) allValid = false;
+    });
+    if(!allValid) return;
+
+    submitButton.disabled = true;
+    submitButton.classList.add("sending");
 
     try {
-      const name = form.querySelector("#from_name")?.value.trim() || "";
-      const email = form.querySelector("#from_email")?.value.trim() || "";
-      const title = form.querySelector("#Title")?.value.trim() || "";
-      const message = form.querySelector("#message")?.value.trim() || "";
+      // emailjs.sendForm lee los name="" del HTML directamente
+      await emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form);
 
-      // Enviar datos a la serverless function — las claves están en el servidor
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          title,
-          message,
-        }),
-      });
-
-      if (!response.ok) throw new Error("Server error");
-
+      form.hidden = false;
+      successMessage.hidden = false;
+      errorMessage.hidden = true;
       form.hidden = true;
-      successEl.hidden = false;
-      errorEl.hidden = true;
-    } catch (err) {
-      console.error("Contact form error:", err);
+
+    } catch (err)
+    {
+      console.error("EmailJS error:", err);
       form.hidden = true;
-      errorEl.hidden = false;
-      successEl.hidden = true;
-    } finally {
-      btnSend.disabled = false;
-      btnSend.classList.remove("sending");
+      successMessage.hidden = true;
+      errorMessage.hidden = false;
+    } finally 
+    {
+      submitButton.disabled = false;
+      submitButton.classList.remove("sending");
     }
   });
 
+
+  // Reiniciar formulario
   const resetForm = () => {
     form.reset();
-    form.querySelectorAll(".form-group.invalid").forEach((g) => g.classList.remove("invalid"));
+    form.querySelectorAll(".form-group.invalid").forEach((g) => 
+      g.classList.remove("invalid")
+  );
     form.hidden = false;
-    successEl.hidden = true;
-    errorEl.hidden = true;
+    successMessage.hidden = true;
+    errorMessage.hidden = true;
   };
 
-  if (btnReset) btnReset.addEventListener("click", resetForm);
-  if (btnRetry) btnRetry.addEventListener("click", resetForm);
+  if(btnReset) btnReset.addEventListener("click", resetForm);
+  if(btnRetry) btnRetry.addEventListener("click", resetForm);
+
 })();
