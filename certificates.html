@@ -4,6 +4,17 @@
     <title>Certifications | Samuel Sanchez</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script>
+      (function() {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (saved === "dark" || (!saved && prefersDark)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+
     <link rel="icon" type="image/jpeg" href="Assets/img/profile.jpg" />
     <link href="css/reset.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
@@ -12,10 +23,10 @@
     <main class="page">
       <nav class="top-nav" aria-label="Primary">
         <div class="nav-links">
-          <a href="index.html" class="nav-link" data-i18n="nav-about">About</a>
-          <a href="projects.html" class="nav-link" data-i18n="nav-projects">Projects</a>
-          <a href="certificates.html" class="nav-link selected" data-i18n="nav-certifications">Certifications</a>
-          <a href="contact.html" class="nav-link" data-i18n="nav-contact">Get in Touch</a>
+          <a rel="prefetch" href="index.html" class="nav-link" data-i18n="nav-about">About</a>
+          <a rel="prefetch" href="projects.html" class="nav-link" data-i18n="nav-projects">Projects</a>
+          <a rel="prefetch" href="certificates.html" class="nav-link selected" data-i18n="nav-certifications">Certifications</a>
+          <a rel="prefetch" href="contact.html" class="nav-link" data-i18n="nav-contact">Get in Touch</a>
         </div>
         <button class="lang-toggle" type="button" aria-label="Cambiar a Español" title="Switch language">EN</button>
         <button

@@ -197,3 +197,20 @@ document.querySelectorAll(".contact-obf").forEach((link) => {
     window.location.href = `mailto:${real}`;
   });
 });
+
+// Transicion suave entre páginas usando el API de Transiciones (si el navegador lo soporta)
+// Transición suave entre páginas
+document.querySelectorAll("a.nav-link").forEach(link => {
+  link.addEventListener("click", async (e) => {
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#")) return;
+
+    // Si el browser soporta View Transitions
+    if (!document.startViewTransition) return;
+
+    e.preventDefault();
+    document.startViewTransition(() => {
+      window.location.href = href;
+    });
+  });
+});
