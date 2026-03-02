@@ -6,6 +6,26 @@ const TYPE_LABELS = {
   es: { all: "Todos", desktop: "Escritorio", mobile: "Móvil", backend: "Backend" },
 };
 
+/** @type {Record<string, string>} */
+const STATUS_SECTION_LABEL = {
+  en: "Project status",
+  es: "Estado del proyecto",
+};
+
+/** @type {Record<string, Record<string, string>>} */
+const STATUS_LABELS = {
+  en: {
+    production: "In production",
+    development: "In development",
+    completed: "Completed",
+  },
+  es: {
+    production: "En producción",
+    development: "En desarrollo",
+    completed: "Completado",
+  },
+};
+
 class ProjectController {
   constructor() {
     this.service = new ProjectService();
@@ -50,9 +70,8 @@ class ProjectController {
     const lang = this.lang;
     const summary = project.summary[lang] ?? project.summary.en;
     const typeLabel = TYPE_LABELS[lang]?.[project.type] ?? project.type;
-    const hasStats =
-      project.githubInfo?.stars !== null &&
-      project.githubInfo?.stars !== undefined;
+    const projectStatuses = Array.isArray(project.status) ? project.status : [];
+    const hasStatus = projectStatuses.length > 0;
     const hasScreenshots = project.screenshots && project.screenshots.length > 0;
     const hasGithub = !!project.githubUsername && !!project.githubRepositoryName;
     const githubUrl = hasGithub
@@ -86,10 +105,14 @@ class ProjectController {
             <h3 class="proj-name">${project.name}</h3>
             <span class="proj-type-badge proj-type-${project.type}">${typeLabel}</span>
           </div>
-          ${hasStats ? `
-            <div class="proj-github-stats">
-              <span class="proj-stat">⭐ ${project.githubInfo.stars}</span>
-              <span class="proj-stat">⤴ ${project.githubInfo.forks}</span>
+          ${hasStatus ? `
+            <div class="proj-status-section">
+              <span class="proj-status-label">${STATUS_SECTION_LABEL[lang] ?? STATUS_SECTION_LABEL.en}</span>
+              <div class="proj-status-list">
+                ${projectStatuses.map((status) => `
+                  <span class="proj-status-badge proj-status-${status}">${STATUS_LABELS[lang]?.[status] ?? status}</span>
+                `).join("")}
+              </div>
             </div>
           ` : ""}
         </div>

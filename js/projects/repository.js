@@ -4,6 +4,12 @@ const DESKTOP_TYPE = "desktop";
 const MOBILE_TYPE = "mobile";
 /** @type {string} */
 const BACKEND_TYPE = "backend";
+/** @type {string} */
+const STATUS_PRODUCTION = "production";
+/** @type {string} */
+const STATUS_DEVELOPMENT = "development";
+/** @type {string} */
+const STATUS_COMPLETED = "completed";
 
 /**
  * @typedef {Object} ProjectLink
@@ -25,6 +31,7 @@ const BACKEND_TYPE = "backend";
  * @property {string[]} techStack
  * @property {string} type
  * @property {string[]} screenshots  — paths relative to project root
+ * @property {string[]} status
  * @property {string|null} githubUsername  — null = private
  * @property {string|null} githubRepositoryName
  */
@@ -46,12 +53,13 @@ class ProjectRepository {
           es: "Sistema de escritorio completo de inventario y punto de venta para cliente del sector belleza. Gestión de productos, stock, historial de ventas y reportes ejecutivos en múltiples formatos.",
         },
         links: [],
-        techStack: ["Rust", "Tauri", "React", "Vite", "SQLite", "JavaScript"],
+        techStack: ["Rust", "Tauri", "React", "Vite", "SQLite", "JavaScript", "Git"],
         type: DESKTOP_TYPE,
+        status: [STATUS_DEVELOPMENT, STATUS_PRODUCTION],
         screenshots: [
 
            "../Assets/projects/stockbeauty/icon.png"
-          // "Assets/img/projects/stockbeauty/inventory.png",
+          // "Assets/projects/stockbeauty/inventory.png",
         ],
         githubUsername: "SamuelSanchez17",
         githubRepositoryName: "inventory-management-system",
@@ -65,6 +73,7 @@ class ProjectRepository {
         links: [],
         techStack: ["Swift", "iOS", "API REST", "JSON", "Git", "Figma"],
         type: MOBILE_TYPE,
+        status: [STATUS_COMPLETED, STATUS_PRODUCTION],
         screenshots: 
         [
           "../Assets/projects/mamLingua/Mamlingua.png",
@@ -76,14 +85,34 @@ class ProjectRepository {
         githubRepositoryName: "Mam-Project",
       },
       {
-        name: "Lab Access Control",
+        name: "Academic Management API",
+        summary: {
+          en: "Academic Management is a REST API designed for educational institutions that need to centralize academic and administrative processes with a maintainable and secure architecture.",
+          es: "Academic Management es una API REST diseñada para instituciones educativas que necesitan centralizar los procesos académicos y administrativos con una arquitectura mantenible y segura.",
+        },
+        links: [],
+        techStack: ["Java", "Spring Boot", "MySQL", "Git", "JWT", "Spring Security", "JPA", "Maven"],
+        type: BACKEND_TYPE,
+        status: [STATUS_COMPLETED],
+        screenshots: 
+        [
+          "../Assets/projects/studentsManagement/Menu.png",
+          "../Assets/projects/studentsManagement/Jwt.png",
+          "../Assets/projects/studentsManagement/Schemas.png",
+        ],
+        githubUsername: "SamuelSanchez17",  // private repository
+        githubRepositoryName: "students-management-api",
+      },
+      {
+        name: "FDN Computer Lab Access System",
         summary: {
           en: "Access-control system processing 500+ monthly lab entries, with Java backend, user authentication, access logging and PostgreSQL query optimization.",
           es: "Sistema de control de acceso que procesa más de 500 entradas mensuales al laboratorio, con backend Java, autenticación, registro de accesos y optimización de consultas en PostgreSQL.",
         },
         links: [],
-        techStack: ["Java", "Spring Boot", "PostgreSQL", "Git", "Jira"],
+        techStack: ["Java", "Spring Boot", "PostgreSQL", "Git", "Jira", "Maven"],
         type: BACKEND_TYPE,
+        status: [STATUS_COMPLETED, STATUS_PRODUCTION],
         screenshots: 
         [
           "../Assets/projects/labAccess/Login.png",
@@ -96,6 +125,7 @@ class ProjectRepository {
         githubUsername: "",  // private repository
         githubRepositoryName: "Sistema-de-Acceso-Laboratorios-de-Computo-FDN",
       },
+
     ];
   }
 
