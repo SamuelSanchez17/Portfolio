@@ -86,8 +86,9 @@ class ProjectController {
             <div class="proj-screenshots-track">
               ${project.screenshots.map((src, i) => `
                 <img src="${src}" alt="${project.name} screenshot ${i + 1}"
-                  class="proj-screenshot${i === 0 ? " active" : ""}"
+                  class="proj-screenshot"
                   loading="${i === 0 ? "eager" : "lazy"}"
+                  draggable="false"
                   decoding="async"/>
               `).join("")}
             </div>
@@ -143,26 +144,87 @@ class ProjectController {
       </div>
     `;
 
-    // Carrusel de Screenshots
-    if (hasScreenshots && project.screenshots.length > 1) {
+    // Carrusel de Screenshots con swipe
+    if (hasScreenshots) {
+      const track = li.querySelector(".proj-screenshots-track");
       const dots = li.querySelectorAll(".proj-dot");
       const imgs = li.querySelectorAll(".proj-screenshot");
+      const total = project.screenshots.length;
+      let current = 0;
+
+      const goTo = (idx) => {
+        current = Math.max(0, Math.min(idx, total - 1));
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle("active", i === current));
+      };
+
+      // Dot navigation
       dots.forEach((dot) => {
         dot.addEventListener("click", () => {
-          const idx = parseInt(dot.dataset.index, 10);
-          imgs.forEach((img, i) => img.classList.toggle("active", i === idx));
-          dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+          goTo(parseInt(dot.dataset.index, 10));
         });
       });
-    }
 
-    // Abre el modal al hacer click en cualquier screenshot
-    if (hasScreenshots) {
-      const imgs = li.querySelectorAll(".proj-screenshot");
+      // ── Swipe / drag logic ──
+      const container = li.querySelector(".proj-screenshots");
+      let startX = 0;
+      let deltaX = 0;
+      let dragging = false;
+      let didDrag = false;
+      const SWIPE_THRESHOLD = 40;
+
+      const onStart = (x) => {
+        dragging = true;
+        didDrag = false;
+        startX = x;
+        deltaX = 0;
+        track.classList.add("dragging");
+      };
+
+      const onMove = (x) => {
+        if (!dragging) return;
+        deltaX = x - startX;
+        if (Math.abs(deltaX) > 5) didDrag = true;
+        // Clamp at edges with rubber-band
+        const baseOffset = -current * 100;
+        const pxToPercent = (deltaX / container.offsetWidth) * 100;
+        track.style.transform = `translateX(${baseOffset + pxToPercent}%)`;
+      };
+
+      const onEnd = () => {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove("dragging");
+        if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+          if (deltaX < 0 && current < total - 1) goTo(current + 1);
+          else if (deltaX > 0 && current > 0) goTo(current - 1);
+          else goTo(current);
+        } else {
+          goTo(current);
+        }
+      };
+
+      // Touch events
+      container.addEventListener("touchstart", (e) => onStart(e.touches[0].clientX), { passive: true });
+      container.addEventListener("touchmove", (e) => onMove(e.touches[0].clientX), { passive: true });
+      container.addEventListener("touchend", onEnd);
+      container.addEventListener("touchcancel", onEnd);
+
+      // Mouse events (desktop drag)
+      container.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        onStart(e.clientX);
+      });
+      container.addEventListener("mousemove", (e) => onMove(e.clientX));
+      container.addEventListener("mouseup", onEnd);
+      container.addEventListener("mouseleave", onEnd);
+
+      // Open modal only on click (not after drag)
       imgs.forEach((img, i) => {
         img.style.cursor = "zoom-in";
-        img.addEventListener("click", () => {
-          this._openModal(project.screenshots, i);
+        img.addEventListener("click", (e) => {
+          if (didDrag) { e.preventDefault(); return; }
+          this._openModal(project.screenshots, current);
         });
       });
     }
