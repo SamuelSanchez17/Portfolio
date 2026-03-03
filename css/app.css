@@ -254,10 +254,24 @@ body {
   animation: rise 0.8s ease both;
 }
 
+.hero-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.hero-title-block {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
 .hero-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
+  width: 136px;
+  height: 136px;
+  border-radius: 20px;
   overflow: hidden;
   border: 2px solid rgba(244, 184, 64, 0.5);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -336,6 +350,7 @@ h1 {
   font-size: 1.02rem;
   max-width: 64ch;
   color: var(--ink);
+  text-align: justify;
 }
 
 .hero-links {
@@ -1172,10 +1187,16 @@ h2 {
     font-size: 0.72rem;
   }
 
+  .hero-heading {
+    justify-content: space-between;
+    gap: 16px;
+  }
+
   .hero-avatar {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    transform: translateX(0);
   }
 
   .hero-links {

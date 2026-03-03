@@ -92,7 +92,7 @@ const translations = {
     "form-try-again": "Try Again",
   },
   es: {
-    "nav-about": "Sobre mí",
+    "nav-about": "Acerca",
     "nav-projects": "Proyectos",
     "nav-certifications": "Certificaciones",
     "hero-pill": "Desarrollador de Software",
