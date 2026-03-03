@@ -270,7 +270,6 @@ body {
 .hero-heading {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
   gap: 16px;
 }
 
@@ -278,7 +277,6 @@ body {
   display: grid;
   gap: 8px;
   min-width: 0;
-  flex: 1;
 }
 
 .hero-avatar {
