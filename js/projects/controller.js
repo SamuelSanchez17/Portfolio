@@ -2,8 +2,8 @@ import { ProjectService } from "./service.js";
 
 /** @type {Record<string, Record<string, string>>} */
 const TYPE_LABELS = {
-  en: { all: "All", desktop: "Desktop", mobile: "Mobile", backend: "Backend" },
-  es: { all: "Todos", desktop: "Escritorio", mobile: "Móvil", backend: "Backend" },
+  en: { all: "All", desktop: "Desktop", mobile: "Mobile", backend: "Backend", frontend: "Frontend" },
+  es: { all: "Todos", desktop: "Escritorio", mobile: "Móvil", backend: "Backend", frontend: "Frontend" },
 };
 
 /** @type {Record<string, string>} */
@@ -45,7 +45,7 @@ class ProjectController {
 
   // ─── Filter pills ────────────────────────────────────────────────────────
   _renderFilters() {
-    const types = ["all", "desktop", "mobile", "backend"];
+    const types = ["all", "desktop", "mobile", "backend", "frontend"];
     this.filtersEl.innerHTML = "";
     types.forEach((type) => {
       const btn = document.createElement("button");

@@ -3,6 +3,7 @@ import {
   DESKTOP_TYPE,
   MOBILE_TYPE,
   BACKEND_TYPE,
+  FRONTEND_TYPE,
 } from "./repository.js";
 
 /**
@@ -50,7 +51,7 @@ class ProjectService {
 
   /**
    * @param {EnrichedProject[]} projects
-   * @param {string} type  — "all" | "desktop" | "mobile" | "backend"
+   * @param {string} type  — "all" | "desktop" | "mobile" | "backend" | "frontend"
    * @returns {EnrichedProject[]}
    */
   filterByType(projects, type) {

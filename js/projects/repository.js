@@ -5,6 +5,8 @@ const MOBILE_TYPE = "mobile";
 /** @type {string} */
 const BACKEND_TYPE = "backend";
 /** @type {string} */
+const FRONTEND_TYPE = "frontend";
+/** @type {string} */
 const STATUS_PRODUCTION = "production";
 /** @type {string} */
 const STATUS_DEVELOPMENT = "development";
@@ -53,7 +55,7 @@ class ProjectRepository {
           es: "Sistema de escritorio completo de inventario y punto de venta para cliente del sector belleza. Gestión de productos, stock, historial de ventas y reportes ejecutivos en múltiples formatos.",
         },
         links: [],
-        techStack: ["Rust", "Tauri", "React", "Vite", "SQLite", "JavaScript", "Git"],
+        techStack: ["Rust", "Tauri", "React", "Vite", "SQLite", "JavaScript", "Git", "i18n"],
         type: DESKTOP_TYPE,
         status: [STATUS_DEVELOPMENT, STATUS_PRODUCTION],
         screenshots: [
@@ -125,7 +127,25 @@ class ProjectRepository {
         githubUsername: "",  // private repository
         githubRepositoryName: "Sistema-de-Acceso-Laboratorios-de-Computo-FDN",
       },
-
+      {
+        name: "Rick & Morty Directory",
+        summary: {
+          en: "Interactive character directory with advanced filters, detailed character view, and real-time favorites powered by Firestore. ES/EN internationalization and mobile-first responsive design.",
+          es: "Directorio interactivo de personajes con filtros combinables, vista de detalle y sistema de favoritos persistido en tiempo real con Firestore. Internacionalización ES/EN y diseño responsive mobile-first.",
+        },
+        links: [],
+        techStack: ["Angular", "TypeScript", "Firebase", "Firestore", "Git", "RxJS", "i18n"],
+        type: FRONTEND_TYPE,
+        status: [STATUS_COMPLETED, STATUS_PRODUCTION],
+        screenshots: 
+        [
+          "../Assets/projects/rick&Morty/Main.png",
+          "../Assets/projects/rick&Morty/Favorites.png",
+          "../Assets/projects/rick&Morty/Details.png",
+        ],
+        githubUsername: "SamuelSanchez17",  // private repository
+        githubRepositoryName: "rick-and-morty-challenge",
+      },
     ];
   }
 
@@ -166,4 +186,4 @@ class ProjectRepository {
   }
 }
 
-export { ProjectRepository, DESKTOP_TYPE, MOBILE_TYPE, BACKEND_TYPE };
+export { ProjectRepository, DESKTOP_TYPE, MOBILE_TYPE, BACKEND_TYPE, FRONTEND_TYPE };
