@@ -130,6 +130,7 @@ const translations = {
     "cert-date-april2024": "Abril 2024",
     "cert-date-june2025": "Junio 2025",
     "cert-date-dec2022": "Diciembre 2022",
+    "cert-date-march2026": "Marzo 2026",
     "h-spoken": "Idiomas hablados 🈷️",
     "sl-0": "Español (nativo)",
     "sl-1": "Inglés (B2)",
