@@ -51,8 +51,8 @@ class ProjectRepository {
       {
         name: "StockBeauty",
         summary: {
-          en: "Full-featured desktop inventory & POS system built for a national beauty sector client. Manages products, stock levels, sales history and generates executive reports in multiple formats.",
-          es: "Sistema de escritorio completo de inventario y punto de venta para cliente del sector belleza. Gestión de productos, stock, historial de ventas y reportes ejecutivos en múltiples formatos.",
+          en: "Comprehensive desktop system for a beauty sector consultancy, centralizing inventory control, sales recording, and executive report generation in multiple formats. Includes integrated data backup and a CI/CD pipeline with GitHub Actions that automates build and deployment of updates directly to the client via Tauri's autoupdater.",
+          es: "Sistema de escritorio completo para una consultora del sector belleza, centralizando el control de inventario, registro de ventas y generación de reportes ejecutivos en múltiples formatos. Incluye respaldo de datos integrado y un pipeline CI/CD con GitHub Actions que automatiza el build y despliegue de actualizaciones directamente al cliente mediante el autoupdater de Tauri.",
         },
         links: [],
         techStack: ["Rust", "Tauri", "React", "Vite", "SQLite", "JavaScript", "Git", "i18n"],
@@ -69,8 +69,8 @@ class ProjectRepository {
       {
         name: "MamLingua App",
         summary: {
-          en: "iOS app to teach and preserve the Mam indigenous language for 300+ university students, with a multilingual translation system integrated via APIs and JSON.",
-          es: "App iOS para enseñar y preservar el idioma mam para más de 300 estudiantes universitarios, con sistema de traducción multilenguaje integrado vía APIs y JSON.",
+          en: "iOS app for teaching and preserving the Mam language, actively used by over 300 university students. Integrates multilingual translation via external APIs with direct impact on cultural preservation of indigenous communities.",
+          es: "Aplicación iOS para la enseñanza y preservación del idioma mam, activa con más de 300 estudiantes universitarios. Integra traducción multilenguaje mediante APIs externas con impacto directo en la preservación cultural de comunidades indígenas.",
         },
         links: [],
         techStack: ["Swift", "iOS", "API REST", "JSON", "Git", "Figma"],
@@ -89,8 +89,8 @@ class ProjectRepository {
       {
         name: "Academic Management API",
         summary: {
-          en: "Academic Management is a REST API designed for educational institutions that need to centralize academic and administrative processes with a maintainable and secure architecture.",
-          es: "Academic Management es una API REST diseñada para instituciones educativas que necesitan centralizar los procesos académicos y administrativos con una arquitectura mantenible y segura.",
+          en: "REST API for educational institution centralizing academic and administrative processes. Implements authentication, role control and layered architecture oriented to scalability, with documented endpoints and clear separation of responsibilities.",
+          es: "API REST para institución educativa que centraliza procesos académicos y administrativos. Implementa autenticación, control de roles y arquitectura en capas orientada a escalabilidad, con endpoints documentados y separación clara de responsabilidades.",
         },
         links: [],
         techStack: ["Java", "Spring Boot", "MySQL", "Git", "JWT", "Spring Security", "JPA", "Maven"],
@@ -106,10 +106,10 @@ class ProjectRepository {
         githubRepositoryName: "students-management-api",
       },
       {
-        name: "FDN Computer Lab Access System",
+        name: "FDN Lab Access System",
         summary: {
-          en: "Access-control system processing 500+ monthly lab entries, with Java backend, user authentication, access logging and PostgreSQL query optimization.",
-          es: "Sistema de control de acceso que procesa más de 500 entradas mensuales al laboratorio, con backend Java, autenticación, registro de accesos y optimización de consultas en PostgreSQL.",
+          en: "University lab access control system processing 500+ monthly records. Features secure authentication, access auditing, and optimized PostgreSQL queries for traceability and performance.",
+          es: "Sistema de control de acceso a laboratorio universitario que procesa más de 500 registros mensuales. Incluye autenticación segura, auditoría de accesos y consultas optimizadas en PostgreSQL para garantizar trazabilidad y rendimiento.",
         },
         links: [],
         techStack: ["Java", "Spring Boot", "PostgreSQL", "Git", "Jira", "Maven"],
@@ -130,8 +130,8 @@ class ProjectRepository {
       {
         name: "Rick & Morty Directory",
         summary: {
-          en: "Interactive character directory with advanced filters, detailed character view, and real-time favorites powered by Firestore. ES/EN internationalization and mobile-first responsive design.",
-          es: "Directorio interactivo de personajes con filtros combinables, vista de detalle y sistema de favoritos persistido en tiempo real con Firestore. Internacionalización ES/EN y diseño responsive mobile-first.",
+          en: "Interactive character directory built as a web app, consuming a public API with dynamic combinable filters, real-time favorites persistence with Firestore and ES/EN internationalization. Responsive design adaptable to any device and emphasis on predictable state management.",
+          es: "Directorio interactivo de personajes construido como aplicación web, consumiendo una API pública con filtros dinámicos combinables, persistencia de favoritos en tiempo real con Firestore e internacionalización ES/EN. Diseño responsive adaptable a cualquier dispositivo y énfasis en gestión de estado predecible.",
         },
         links: [],
         techStack: ["Angular", "TypeScript", "Firebase", "Firestore", "Git", "RxJS", "i18n"],
