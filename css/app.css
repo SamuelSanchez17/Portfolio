@@ -461,6 +461,7 @@ h1 {
   display: inline-block;
   direction: rtl;
   unicode-bidi: bidi-override;
+  display: inline-block;
 }
 
 .contact-icon {

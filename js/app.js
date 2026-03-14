@@ -216,3 +216,8 @@ document.querySelectorAll("a.nav-link").forEach(link => {
     });
   });
 });
+
+document.querySelector('.reverse').addEventListener('copy', function(e) {
+  e.clipboardData.setData('text/plain', 'samuel.sanchezdev17@gmail.com');
+  e.preventDefault();
+});
