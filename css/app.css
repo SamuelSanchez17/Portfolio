@@ -309,14 +309,17 @@ body {
 
 .hero-meta {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
+  row-gap: 8px;
   flex-wrap: wrap;
   font-size: 0.95rem;
   color: var(--muted);
 }
 
 .pill {
+  display: inline-flex;
+  align-items: center;
   background: rgba(244, 184, 64, 0.18);
   color: var(--accent-strong);
   border: 1px solid rgba(244, 184, 64, 0.4);
@@ -324,6 +327,10 @@ body {
   border-radius: 999px;
   font-weight: 600;
   letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: normal;
+  max-width: min(100%, 30ch);
+  text-wrap: balance;
 }
 
 .meta-sep {
@@ -1215,6 +1222,28 @@ h2 {
   .hero-heading {
     justify-content: space-between;
     gap: 16px;
+  }
+
+  .hero-meta {
+    gap: 8px;
+    row-gap: 6px;
+    align-items: flex-start;
+    font-size: 0.9rem;
+  }
+
+  .pill {
+    font-size: 0.78rem;
+    padding: 5px 10px;
+    max-width: calc(100% - 2px);
+  }
+
+  .meta-sep {
+    display: none;
+  }
+
+  .location {
+    width: 100%;
+    font-size: 0.86rem;
   }
 
   .hero-avatar {
