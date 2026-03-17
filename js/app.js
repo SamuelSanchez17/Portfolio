@@ -98,7 +98,7 @@ const translations = {
     "nav-projects": "Proyectos",
     "nav-certifications": "Certificaciones",
     "hero-pill": "Desarrollador Full-Stack",
-    "hero-summary": `Soy Samuel Sanchez, <strong>Desarrollador de Software Full-Stack</strong> con más de2 años de experiencia diseñando REST APIs, sistemas de escritorio y aplicaciones móviles con impacto en usuarios reales. He entregado soluciones a clientes activos, incluyendo sistemas en producción con pipelines CI/CD, bases de datos optimizadas en PostgreSQL y apps con más de 300 usuarios. Trabajo con Java, Python y JavaScript construyendo software mantenible y orientado a resolver problemas concretos de negocio.`,
+    "hero-summary": `Soy Samuel Sanchez, <strong>Desarrollador de Software Full-Stack</strong> con más de 2 años de experiencia diseñando REST APIs, sistemas de escritorio y aplicaciones móviles con impacto en usuarios reales. He entregado soluciones a clientes activos, incluyendo sistemas en producción con pipelines CI/CD, bases de datos optimizadas en PostgreSQL y apps con más de 300 usuarios. Trabajo con Java, Python y JavaScript construyendo software mantenible y orientado a resolver problemas concretos de negocio.`,
     "h-contact": "Contacto",
     "h-skills": "Habilidades Técnicas",
     "sg-languages": "Lenguajes",
