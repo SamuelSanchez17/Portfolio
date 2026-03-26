@@ -36,6 +36,7 @@ const STATUS_COMPLETED = "completed";
  * @property {string[]} status
  * @property {string|null} githubUsername  — null = private
  * @property {string|null} githubRepositoryName
+ * @property {string|null} demoUrl
  */
 
 /**
@@ -65,6 +66,7 @@ class ProjectRepository {
         ],
         githubUsername: "SamuelSanchez17",
         githubRepositoryName: "inventory-management-system",
+        demoUrl: null,
       },
       {
         name: "MamLingua App",
@@ -85,6 +87,7 @@ class ProjectRepository {
         ],
         githubUsername: "SamuelSanchez17",
         githubRepositoryName: "Mam-Project",
+        demoUrl: null,
       },
       {
         name: "Academic Management API",
@@ -104,6 +107,7 @@ class ProjectRepository {
         ],
         githubUsername: "SamuelSanchez17",  // private repository
         githubRepositoryName: "students-management-api",
+        demoUrl: null,
       },
       {
         name: "FDN Lab Access System",
@@ -126,6 +130,7 @@ class ProjectRepository {
         ],
         githubUsername: "",  // private repository
         githubRepositoryName: "Sistema-de-Acceso-Laboratorios-de-Computo-FDN",
+        demoUrl: null,
       },
       {
         name: "Rick & Morty Directory",
@@ -145,6 +150,7 @@ class ProjectRepository {
         ],
         githubUsername: "SamuelSanchez17",  // private repository
         githubRepositoryName: "rick-and-morty-challenge",
+        demoUrl: "https://directory-rick-morty.web.app",
       },
     ];
   }

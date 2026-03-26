@@ -74,6 +74,7 @@ class ProjectController {
     const hasStatus = projectStatuses.length > 0;
     const hasScreenshots = project.screenshots && project.screenshots.length > 0;
     const hasGithub = !!project.githubUsername && !!project.githubRepositoryName;
+    const hasDemo = !!project.demoUrl;
     const githubUrl = hasGithub
       ? `https://github.com/${project.githubUsername}/${project.githubRepositoryName}`
       : null;
@@ -139,6 +140,16 @@ class ProjectController {
                 Private
               </span>
             `}
+            ${hasDemo ? `
+              <a href="${project.demoUrl}" target="_blank" class="proj-link proj-link-demo" aria-label="View live demo of ${project.name}">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M14 3h7v7"/>
+                  <path d="M10 14L21 3"/>
+                  <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/>
+                </svg>
+                Demo
+              </a>
+            ` : ""}
           </div>
         </div>
       </div>

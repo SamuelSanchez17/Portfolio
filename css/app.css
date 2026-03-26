@@ -1053,7 +1053,8 @@ h2 {
   border-color: var(--accent);
 }
 
-.proj-link-github svg {
+.proj-link-github svg,
+.proj-link-demo svg {
   width: 14px;
   height: 14px;
   stroke: currentColor;
