@@ -4,7 +4,7 @@
 
 **Personal portfolio showcasing my projects, skills and experience as a Full-Stack Software Developer.**
 
-[![Live](https://img.shields.io/badge/Live-samuelsanchez.vercel.app-00d4aa?style=for-the-badge&logo=vercel)](https://samuelsanchez.vercel.app)
+[![Live](https://img.shields.io/badge/Live-samuelsanchez.vercel.app-00d4aa?style=for-the-badge&logo=vercel)](https://samuelsanchez.dev)
 
 </div>
 
@@ -31,4 +31,4 @@
 ## 👨‍💻 Author
 
 **Samuel Sanchez Guzman**
-[samuelsanchez.vercel.app](https://samuelsanchez.vercel.app) · [LinkedIn](https://linkedin.com/in/samuel-sanchez-guzman) · [GitHub](https://github.com/SamuelSanchez17)
+[samuelsanchez.dev](https://samuelsanchez.dev) · [LinkedIn](https://linkedin.com/in/samuel-sanchez-guzman) · [GitHub](https://github.com/SamuelSanchez17)
