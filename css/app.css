@@ -11,6 +11,17 @@
   --border: #eadfcd;
   --shadow: 0 14px 36px rgba(24, 18, 8, 0.12);
   --radius: 18px;
+  --expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --theme-burst: rgba(244, 184, 64, 0.22);
+  --theme-transition-duration: 0.38s;
+  --theme-transition-radius: 170vmax;
+}
+
+@media (max-width: 768px), (pointer: coarse) {
+  :root {
+    --theme-transition-duration: 0.3s;
+    --theme-transition-radius: 160vmax;
+  }
 }
 
 [data-theme="dark"] {
@@ -23,6 +34,7 @@
   --accent-strong: #58a6ff;
   --border: #30363d;
   --shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --theme-burst: rgba(121, 192, 255, 0.22);
 }
 
 body {
@@ -2067,4 +2079,37 @@ h2 {
 
 ::view-transition-new(root) {
   animation: fade-in 0.25s ease;
+}
+
+/* tema top left: solo cuando se pulsa el toggle light/dark */
+html.theme-transition::view-transition-group(root) {
+  animation-timing-function: var(--expo-out);
+}
+
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: none !important;
+}
+
+html.theme-transition::view-transition-new(root) {
+  mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="0" cy="0" r="18" fill="white"/></svg>') top left / 14px no-repeat;
+  -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="0" cy="0" r="18" fill="white"/></svg>') top left / 14px no-repeat;
+  mask-origin: content-box;
+  -webkit-mask-origin: content-box;
+  animation: scale var(--theme-transition-duration) var(--expo-out);
+  animation-fill-mode: both;
+  transform-origin: top left;
+}
+
+html.theme-transition::view-transition-old(root),
+html[data-theme="dark"].theme-transition::view-transition-old(root) {
+  z-index: -1;
+}
+
+@keyframes scale {
+  to {
+    mask-size: var(--theme-transition-radius);
+    -webkit-mask-size: var(--theme-transition-radius);
+  }
 }

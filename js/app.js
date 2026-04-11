@@ -22,10 +22,35 @@ const setTheme = (theme) => {
 
 if (toggle) {
   setTheme(getInitialTheme());
-  toggle.addEventListener("click", () => {
+  toggle.addEventListener("click", async () => {
     const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
-    localStorage.setItem("theme", nextTheme);
+
+    const applyNextTheme = () => {
+      root.classList.add("theme-transition");
+      setTheme(nextTheme);
+      localStorage.setItem("theme", nextTheme);
+    };
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!document.startViewTransition || prefersReducedMotion) {
+      applyNextTheme();
+      requestAnimationFrame(() => {
+        root.classList.remove("theme-transition");
+      });
+      return;
+    }
+
+    const transition = document.startViewTransition(() => {
+      applyNextTheme();
+    });
+
+    try {
+      await transition.finished;
+    } finally {
+      requestAnimationFrame(() => {
+        root.classList.remove("theme-transition");
+      });
+    }
   });
 }
 
