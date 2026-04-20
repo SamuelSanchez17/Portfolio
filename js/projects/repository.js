@@ -61,7 +61,7 @@ class ProjectRepository {
         status: [STATUS_DEVELOPMENT, STATUS_PRODUCTION],
         screenshots: [
 
-           "../Assets/projects/stockbeauty/icon.png"
+           "../Assets/projects/stockbeauty/icon.webp"
           // "Assets/projects/stockbeauty/inventory.png",
         ],
         githubUsername: "SamuelSanchez17",
@@ -80,10 +80,10 @@ class ProjectRepository {
         status: [STATUS_COMPLETED, STATUS_PRODUCTION],
         screenshots: 
         [
-          "../Assets/projects/mamLingua/Mamlingua.png",
-          "../Assets/projects/mamLingua/Descripcion.png",
-          "../Assets/projects/mamLingua/Traditions.png",
-          "../Assets/projects/mamLingua/Translator.png"
+          "../Assets/projects/mamLingua/Mamlingua.webp",
+          "../Assets/projects/mamLingua/Descripcion.webp",
+          "../Assets/projects/mamLingua/Traditions.webp",
+          "../Assets/projects/mamLingua/Translator.webp"
         ],
         githubUsername: "SamuelSanchez17",
         githubRepositoryName: "Mam-Project",
@@ -101,9 +101,9 @@ class ProjectRepository {
         status: [STATUS_COMPLETED],
         screenshots: 
         [
-          "../Assets/projects/studentsManagement/Menu.png",
-          "../Assets/projects/studentsManagement/Jwt.png",
-          "../Assets/projects/studentsManagement/Schemas.png",
+          "../Assets/projects/studentsManagement/Menu.webp",
+          "../Assets/projects/studentsManagement/Jwt.webp",
+          "../Assets/projects/studentsManagement/Schemas.webp",
         ],
         githubUsername: "SamuelSanchez17",  // private repository
         githubRepositoryName: "students-management-api",
@@ -121,12 +121,12 @@ class ProjectRepository {
         status: [STATUS_COMPLETED, STATUS_PRODUCTION],
         screenshots: 
         [
-          "../Assets/projects/labAccess/Login.png",
-          "../Assets/projects/labAccess/SelectLab.png",
-          "../Assets/projects/labAccess/Scan.png",
-          "../Assets/projects/labAccess/ScanQR.png",
-          "../Assets/projects/labAccess/Reports.png",
-          "../Assets/projects/labAccess/Visits.png",
+          "../Assets/projects/labAccess/Login.webp",
+          "../Assets/projects/labAccess/SelectLab.webp",
+          "../Assets/projects/labAccess/Scan.webp",
+          "../Assets/projects/labAccess/ScanQR.webp",
+          "../Assets/projects/labAccess/Reports.webp",
+          "../Assets/projects/labAccess/Visits.webp",
         ],
         githubUsername: "",  // private repository
         githubRepositoryName: "Sistema-de-Acceso-Laboratorios-de-Computo-FDN",
@@ -144,9 +144,9 @@ class ProjectRepository {
         status: [STATUS_COMPLETED, STATUS_PRODUCTION],
         screenshots: 
         [
-          "../Assets/projects/rick&Morty/Main.png",
-          "../Assets/projects/rick&Morty/Favorites.png",
-          "../Assets/projects/rick&Morty/Details.png",
+          "../Assets/projects/rick&Morty/Main.webp",
+          "../Assets/projects/rick&Morty/Favorites.webp",
+          "../Assets/projects/rick&Morty/Details.webp",
         ],
         githubUsername: "SamuelSanchez17",  // private repository
         githubRepositoryName: "rick-and-morty-challenge",
