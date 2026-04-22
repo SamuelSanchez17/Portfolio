@@ -1,3 +1,5 @@
+import { DEFAULT_TECH_ICON, TECH_ICONS } from "./utils/icons.js";
+
 const root = document.documentElement;
 
 // ─── Theme ────────────────────────────────────────────────────────────────────
@@ -7,6 +9,34 @@ const getInitialTheme = () => {
   const saved = localStorage.getItem("theme");
   if (saved === "light" || saved === "dark") return saved;
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+};
+
+const normalizeSkillName = (label) => label.trim().toUpperCase().replace(/[^A-Z0-9]+/g, "_");
+
+const decorateSkillTags = () => {
+  document.querySelectorAll(".skill-tags li").forEach((item) => {
+    if (item.dataset.iconized === "true") return;
+
+    const label = item.textContent.trim();
+    const iconKey = normalizeSkillName(label);
+    const icon = TECH_ICONS[iconKey] || DEFAULT_TECH_ICON;
+
+    item.innerHTML = `
+      <span class="skill-tag-icon" aria-hidden="true">${icon}</span>
+      <span class="skill-tag-label">${label}</span>
+    `;
+    item.dataset.iconized = "true";
+
+    item.addEventListener("pointerdown", () => {
+      item.classList.remove("is-pressed");
+      requestAnimationFrame(() => {
+        item.classList.add("is-pressed");
+      });
+      window.setTimeout(() => {
+        item.classList.remove("is-pressed");
+      }, 160);
+    });
+  });
 };
 
 const setTheme = (theme) => {
@@ -208,6 +238,7 @@ const applyLanguage = (lang) => {
 const getInitialLang = () => localStorage.getItem("lang") || "en";
 
 applyLanguage(getInitialLang());
+decorateSkillTags();
 
 if (langBtn) {
   langBtn.addEventListener("click", () => {
