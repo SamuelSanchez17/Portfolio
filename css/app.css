@@ -505,6 +505,54 @@ h1 {
   stroke-linejoin: round;
 }
 
+/* Scroll to Top Button */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 8px 16px rgba(24, 18, 8, 0.12);
+  z-index: 1000;
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top-btn.hidden {
+  transform: translateY(20px);
+}
+
+.scroll-top-btn:hover {
+  background: rgba(244, 184, 64, 0.1);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .scroll-top-btn {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--ink);
+}
+
+.scroll-top-btn i {
+  font-size: 1.5rem;
+  line-height: 0;
+}
+
 .contact-text {
   display: grid;
   gap: 1px;

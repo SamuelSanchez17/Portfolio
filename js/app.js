@@ -258,6 +258,37 @@ document.querySelectorAll(".contact-obf").forEach((link) => {
   });
 });
 
+// ─── Scroll to Top ─────────────────────────────────────────────────────────────
+const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+const handleScroll = () => {
+  if (window.scrollY > 300) { // Show after 300px scroll
+    scrollToTopBtn.classList.add('visible');
+    scrollToTopBtn.classList.remove('hidden');
+  } else {
+    scrollToTopBtn.classList.remove('visible');
+    scrollToTopBtn.classList.add('hidden');
+  }
+};
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+};
+
+if (scrollToTopBtn) {
+  // Initial check
+  handleScroll();
+  
+  // Scroll event listener
+  window.addEventListener('scroll', handleScroll);
+  
+  // Click event listener
+  scrollToTopBtn.addEventListener('click', scrollToTop);
+}
+
 // Transicion suave entre páginas usando el API de Transiciones (si el navegador lo soporta)
 // Transición suave entre páginas
 document.querySelectorAll("a.nav-link").forEach(link => {
