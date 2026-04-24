@@ -30,7 +30,7 @@ export const TECH_ICONS = {
   JAVASCRIPT: mono("javascript", "JavaScript"),
   TYPESCRIPT: mono("typescript", "TypeScript"),
   RUST: mono("rust", "Rust"),
-  SQL: mono("postgresql", "SQL"),
+  POSTMAN: mono("postman", "Postman"),
   SPRING_BOOT: mono("springboot", "Spring Boot"),
   REACT: mono("react", "React"),
   VUE: mono("vuedotjs", "Vue.js"),
@@ -41,7 +41,6 @@ export const TECH_ICONS = {
   SQLITE: mono("sqlite", "SQLite"),
   GIT: mono("git", "Git"),
   JIRA: mono("jira", "Jira"),
-  REST_APIS: mono("simpleicons", "REST APIs"),
-  AGILE: mono("simpleicons", "Agile"),
+  REST_APIS: mono("swagger", "REST APIs"),
   FIGMA: mono("figma", "Figma"),
 };
