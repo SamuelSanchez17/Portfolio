@@ -231,6 +231,14 @@ const applyLanguage = (lang) => {
       lang === "en" ? "Cambiar a Español" : "Switch to English"
     );
   }
+
+  const cvLink = document.getElementById("cv-download-link");
+  if (cvLink) {
+    cvLink.href = lang === "en" 
+      ? "Assets/CV/CV-Samuel-Sanchez-Guzman_EN.pdf" 
+      : "Assets/CV/CV-Samuel-Sanchez-Guzman.pdf";
+  }
+
   // Notify dynamically-rendered components (e.g. project cards)
   document.dispatchEvent(new CustomEvent("portfolioLangChange", { detail: { lang } }));
 };
